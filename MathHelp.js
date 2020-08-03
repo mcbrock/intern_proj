@@ -69,8 +69,8 @@ module.exports = {
 	filename: 'mathvideosearch',
 	title: 'Math Helper!',
 	introduction: [
-		'Learn or improve your Math skills!',
-		'When the game starts, you can choose the topic and video you would like to watch!'
+		'Learn or improve your Math skills!🧠💪',
+		'When the game starts, you can choose the topic and video you would like to watch! 🎬'
 	],
 	start: start,
 	state: state
