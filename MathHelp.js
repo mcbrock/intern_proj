@@ -50,7 +50,24 @@ const state = (payload, say, sendButton) => {
 	input_ary = payload.split('-');
 	topic = input_ary[0];
 	subtopic = input_ary[1];
-    vidtype = input_ary[2];
+	vidtype = input_ary[2];
+	
+	axios ({
+		method: '', //post or get?
+		baseURL: '', //our server (http://34.96.245.124:22)?
+		url: '/NemoText',
+		'Content-Type': 'application/json',
+		data: {
+            //add
+        }
+
+	})
+
+		.catch((err) => {})
+		sendButton("Try again?",[{title: 'Yes', payload: 'TryAgain'},'No']);
+
+	
+		
 	if (payload === topic + '-' + subtopic + '-' + vidtype + '-N') {
 		// if (topic === 'precalc') {
         //     //code
