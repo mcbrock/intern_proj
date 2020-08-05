@@ -25,7 +25,7 @@ const state = (payload, say, sendButton) => {
 		if (topic === 'precalc') {
 			const str = 'Great! Precalculus it is!🥳';
 			say(str).then(() => {
-				sendButton('So many topics to choose! Which one do you want to study?🤔', [{ title: 'Graphs', payload: 'precalc-graphs-N' }, { title: 'Lines & Rates of Change', payload: 'precalc-lines-N' }, { title: 'Polynomials', payload: 'precalc-polynomials-N' }]);
+				sendButton('So many topics to choose! Which one do you want to study?🤔', [{ title: 'Graphs', payload: 'precalc-graphs-N' }, { title: 'Lines & Rates of Change', payload: 'precalc-lines-N' }, { title: 'Polynomials', payload: 'precalc-polynomials-N' }, { title: 'General Overview', payload: 'precalc-overview-N' }]);
 
 			});
         }
@@ -33,7 +33,7 @@ const state = (payload, say, sendButton) => {
         if (topic === 'trig'){
             const str = 'Awesome! Let\'s learn Trigonometry!🥳';  
             say(str).then(() => {
-                sendButton('So many topics to choose! Which one do you want to study?🤔', [{ title: 'Trigonometric Functions', payload: 'trig-funcs-N' }, { title: 'Identities', payload: 'trig-identity-N' }]);
+                sendButton('So many topics to choose! Which one do you want to study?🤔', [{ title: 'Trigonometric Functions', payload: 'trig-funcs-N' }, { title: 'Identities', payload: 'trig-identity-N' }, { title: 'General Overview', payload: 'trig-overview-N' }]);
                 
 			});
         }
@@ -62,9 +62,11 @@ const state = (payload, say, sendButton) => {
         }
 
 	})
-
-		.catch((err) => {})
-		sendButton("Try again?",[{title: 'Yes', payload: 'TryAgain'},'No']);
+	.then((result) => {
+		// do something with returned data?
+	})
+	.catch((err) => {})
+	sendButton("Try again?",[{title: 'Yes', payload: 'TryAgain'},'No']);
 
 	
 		
