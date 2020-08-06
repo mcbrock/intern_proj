@@ -11,3 +11,5 @@ app.post("/NemoText",(req,res) => {
 app.listen()
 
 //iframe in HTML?
+
+module.exports = app;
