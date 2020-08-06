@@ -1,15 +1,14 @@
 const express = require('express');
 const app = express();
-const port = " "; //we probs need to specify a port, because so many people are using it 
+app.set('port', process.env.PORT || 2200); //2200 = port, just some random # that seems unique 
 
-let videos = [];
+
 
 app.post("/NemoText",(req,res) => {
 
 });
 
-app.listen()
-
+app.listen(app.get('port'));
 //iframe in HTML?
 
 module.exports = app;
