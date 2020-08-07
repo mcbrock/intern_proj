@@ -58,7 +58,7 @@ const state = (payload, say, sendButton) => {
 		url: '/NemoText',
 		'Content-Type': 'application/json',
 		data: {
-            //add
+            specifics: input_ary
         }
 
 	})
