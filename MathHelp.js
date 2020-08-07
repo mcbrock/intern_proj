@@ -54,7 +54,7 @@ const state = (payload, say, sendButton) => {
 	
 	axios ({
 		method: '', //post or get?
-		baseURL: '', //our server url
+		baseURL: '34.96.245.124:2200', //our server url
 		url: '/NemoText',
 		'Content-Type': 'application/json',
 		data: {

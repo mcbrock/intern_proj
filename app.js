@@ -1,14 +1,17 @@
 const express = require('express');
 const app = express();
-app.set('port', process.env.PORT || 2200); //2200 = port, just some random # that seems unique 
+const PORT = process.env.PORT || 2200;
 
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+});
 
 
 app.post("/NemoText",(req,res) => {
 
 });
 
-app.listen(app.get('port'));
+
 //iframe in HTML?
 
 module.exports = app;
