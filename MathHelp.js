@@ -53,8 +53,8 @@ const state = (payload, say, sendButton) => {
 	vidtype = input_ary[2];
 	
 	axios ({
-		method: '', //post or get?
-		baseURL: '34.96.245.124:2200', //our server url
+		method: 'post', //post or get?
+		baseURL: 'http://34.96.245.124:2200', //our server url
 		url: '/NemoText',
 		'Content-Type': 'application/json',
 		data: {
