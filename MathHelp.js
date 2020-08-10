@@ -1,49 +1,49 @@
 'use strict'
 const axios = require('axios');
-
-
+​
+​
 const start = (say, sendButton) => {
 	sendButton("Let's start off by picking a subject!", [{ title: "Yes! Let's go! 😄", payload: '1' }]);
 };
-
+​
 const state = (payload, say, sendButton) => {
 	//Variables
 	var input_ary, topic, subtopic, vidtype, results
-
+​
 	if (payload === '1') {
 		const str = 'Welcome Back! Let\'s get ready to work!📝';
 		say(str).then(() => {
-			sendButton('What subject would you like study now?', [{ title: 'Precalculus🤩', payload: 'precalc-N' }, { title: 'Calculus😎', payload: 'calc-N' }, { title: 'Trigonometry😋', payload: 'trig-N' }]);
-
+			sendButton('What subject would you like study now?', [{ title: 'Precalculus🤩', payload: 'precalculus-N' }, { title: 'Calculus😎', payload: 'calculus-N' }, { title: 'Trigonometry😋', payload: 'trigonometry-N' }]);
+​
 		});
-
+​
 	}
-
+​
 	input_ary = payload.split('-');
 	topic = input_ary[0];
 	if (payload === topic + '-N') {
 		if (topic === 'precalc') {
 			const str = 'Great! Precalculus it is!🥳';
 			say(str).then(() => {
-				sendButton('So many topics to choose! Which one do you want to study?🤔', [{ title: 'Graphs', payload: 'precalc-graphs-N' }, { title: 'Lines & Rates of Change', payload: 'precalc-lines-N' }, { title: 'Polynomials', payload: 'precalc-polynomials-N' }, { title: 'General Overview', payload: 'precalc-overview-N' }]);
-
+				sendButton('So many topics to choose! Which one do you want to study?🤔', [{ title: 'Graphs', payload: 'precalculus-graphs-N' }, { title: 'Lines & Rates of Change', payload: 'precalculus-lines-N' }, { title: 'Polynomials', payload: 'precalc-polynomials-N' }, { title: 'General Overview', payload: 'precalculus-overview-N' }]);
+​
 			});
         }
         
         if (topic === 'trig'){
             const str = 'Awesome! Let\'s learn Trigonometry!🥳';  
             say(str).then(() => {
-                sendButton('So many topics to choose! Which one do you want to study?🤔', [{ title: 'Trigonometric Functions', payload: 'trig-funcs-N' }, { title: 'Identities', payload: 'trig-identity-N' }, { title: 'General Overview', payload: 'trig-overview-N' }]);
+                sendButton('So many topics to choose! Which one do you want to study?🤔', [{ title: 'Trigonometric Functions', payload: 'trigonometry-functions-N' }, { title: 'Identities', payload: 'trigonometry-identities-N' }, { title: 'General Overview', payload: 'trigonometry-overview-N' }]);
                 
 			});
         }
     }
     
-
+​
 	input_ary = payload.split('-');
 	topic = input_ary[0];
 	subtopic = input_ary[1];
-
+​
 	if (payload === topic + '-' + subtopic + '-N') {
 		sendButton('What kind of video are you looking for?📺', [{ title: 'Short Video', payload: topic + '-' + subtopic + '-short-N' }, { title: 'Long Video', payload: topic + '-' + subtopic + '-long-N' }]);
 	}
@@ -52,38 +52,28 @@ const state = (payload, say, sendButton) => {
 	subtopic = input_ary[1];
 	vidtype = input_ary[2];
 	
-	axios ({
-		method: 'post', //post or get?
-		baseURL: 'http://34.96.245.124:2200', //our server url
-		url: '/NemoText',
-		'Content-Type': 'application/json',
-		data: {
-            specifics: input_ary
-        }
-
-	})
-	.then((result) => {
-		// do something with returned data?
-	})
-	.catch((err) => {})
-	sendButton("Try again?",[{title: 'Yes', payload: 'TryAgain'},'No']);
-
-	
 		
 	if (payload === topic + '-' + subtopic + '-' + vidtype + '-N') {
-		// if (topic === 'precalc') {
-        //     //code
-		// 	}
-        // }
-        
-        // if (topic === 'trig'){
-        //     //code
-        //     }
-        // }
+		axios ({
+			method: 'post', //post or get?
+			baseURL: 'http://34.96.245.124:2200', //our server url
+			url: '/NemoText',
+			'Content-Type': 'application/json',
+			data: {
+				specifics: input_ary
+			}
+	
+		})
+		.then((result) => {
+			// do something with returned data?
+		})
+		.catch((err) => {})
+		sendButton("Try again?",[{title: 'Yes', payload: 'TryAgain'},'No']);
+	
 	}
-
+​
 };
-
+​
 module.exports = {
 	filename: 'mathvideosearch',
 	title: 'Math Helper!',
@@ -94,8 +84,6 @@ module.exports = {
 	start: start,
 	state: state
 };
-
-
 
 
 

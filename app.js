@@ -17,12 +17,19 @@ app.listen(PORT, () => {
 ​
 //const cp = require('child_process');
 ​
+var link = "Null";
 ​
 app.post("/NemoText",(req,res) => {
     var user_data = req.body["specifics"];  //what we get from Nemobot user (the payload)
     var link = main(user_data); // call main(user_data)
    // var link = cp.fork("./home/grant/programs/portfolio/HeadlessSearch.js", user_data); //Not 100% sure about the directory
+   res.end();
 });
+
+app.get("/search",(req,res)=>{
+    res.render('search.ejs',{data:link}); //not sure that's the data we want
+});
+
 ​
 ​
 //iframe in HTML?
