@@ -19,7 +19,7 @@
             <hr>
         </div>
         <div class="container text-center">
-            <div id="">  <!--add the id-->
+            <div id="showLink">  <!--add the id-->
                 <!-- The updated data will show here -->
             </div>
         </div>
@@ -27,9 +27,9 @@
 </section>
 
 <script>
-    var message = "<%- data %>"; //I think we keep this 
-    // var newdiv1 = ( "<p>" + message + "</p>" );
-    // $("#showMessage").append(newdiv1);
+    var vid_link = "<%- data %>"; //I think we keep this 
+    var newdiv1 = ( "<p>" + vid_link + "</p>" );
+    $("#showLink").append(newdiv1);
 </script>
 </body>
 </html>
