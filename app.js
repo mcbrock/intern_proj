@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 2200; //picked arbitrary #
-
+const bodyParser = require('body-parser');
 const { Builder, By, Key, util, until } = require("selenium-webdriver");
 var numeral = require('numeral');
 const chrome = require('selenium-webdriver/chrome')
@@ -9,33 +9,38 @@ const options = new chrome.Options()
 options.addArguments('--disable-dev-shm-usage')
 options.addArguments('--no-sandbox')
 options.addArguments('--headless')
-​
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-});
-​
-​
+// ​
+// ​
 //const cp = require('child_process');
 ​
 var link = "Null";
+var bool = false;
 ​
-app.post("/NemoText",(req,res) => {
-    var user_data = req.body["specifics"];  //what we get from Nemobot user (the payload)
-    var link = main(user_data); // call main(user_data)
-   // var link = cp.fork("./home/grant/programs/portfolio/HeadlessSearch.js", user_data); //Not 100% sure about the directory
-   res.end();
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set("view options", { layout: false });
+app.use('/', express.static(__dirname));
+app.use(bodyParser.json());
+​
+app.post("/NemoText", (req, res) => {
+  var user_data = req.body["specifics"];  //what we get from Nemobot user (the payload)
+  // link = req.body["specifics"];
+  // console.log(link); // test the passed value
+  // user_data = ['precalculus', 'overview', 'long'];
+  link = main(user_data); // call main(user_data)
+  bool = true
+  // var link = cp.fork("./home/grant/programs/portfolio/HeadlessSearch.js", user_data); //Not 100% sure about the directory
+  res.end();
 });
-
-app.get("/search",(req,res)=>{
-    res.render('search.ejs',{data:link}); //not sure that's the data we want
+​
+// if (bool) {
+app.get("/search", (req, res) => {
+  res.render('search.ejs', { data: link }); //not sure that's the data we want
 });
-
-​
-​
-//iframe in HTML?
-​
-​
-​
+// }
+// ​​
+// ​// everything below this works
+// ​
 const driver = new Builder()
   .forBrowser('chrome')
   .setChromeOptions(options)
@@ -98,16 +103,24 @@ async function getBestVid() {
 }
 ​
 ​
-async function main(inputArr) {
-  let maintopic = inputArr[0]
-  let subtopic = inputArr[1]
-  let vidlength = inputArr[2]
-  let topic = maintopic + " " + subtopic
+async function main(input) {
+  let topic = input.substring(0, input.lastIndexOf(" ")).trim();
+  let vidlength = input.substring(input.lastIndexOf(" ") + 1).trim();
+  
+  // let maintopic = inputArr[0]
+  // let subtopic = inputArr[1]
+  // let vidlength = inputArr[2]
+  // let topic = maintopic + " " + subtopic
   // var args = process.argv.slice(2);
   // let vidlength = args[args.length - 1].trim()
   // let topic = args.slice(0, -1).join(" ")
   ytsearch(topic, vidlength)
-} 
+}
 ​
+​
+​
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
 ​
 module.exports = app;

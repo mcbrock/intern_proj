@@ -22,23 +22,23 @@ const state = (payload, say, sendButton) => {
 	input_ary = payload.split('-');
 	topic = input_ary[0];
 	if (payload === topic + '-N') {
-		if (topic === 'precalc') {
+		if (topic === 'precalculus') {
 			const str = 'Great! Precalculus it is!🥳';
 			say(str).then(() => {
 				sendButton('So many topics to choose! Which one do you want to study?🤔', [{ title: 'Graphs', payload: 'precalculus-graphs-N' }, { title: 'Lines & Rates of Change', payload: 'precalculus-lines-N' }, { title: 'Polynomials', payload: 'precalc-polynomials-N' }, { title: 'General Overview', payload: 'precalculus-overview-N' }]);
 ​
 			});
-        }
-        
-        if (topic === 'trig'){
-            const str = 'Awesome! Let\'s learn Trigonometry!🥳';  
-            say(str).then(() => {
-                sendButton('So many topics to choose! Which one do you want to study?🤔', [{ title: 'Trigonometric Functions', payload: 'trigonometry-functions-N' }, { title: 'Identities', payload: 'trigonometry-identities-N' }, { title: 'General Overview', payload: 'trigonometry-overview-N' }]);
-                
+		}
+​
+		if (topic === 'trigonometry') {
+			const str = 'Awesome! Let\'s learn Trigonometry!🥳';
+			say(str).then(() => {
+				sendButton('So many topics to choose! Which one do you want to study?🤔', [{ title: 'Trigonometric Functions', payload: 'trigonometry-functions-N' }, { title: 'Identities', payload: 'trigonometry-identities-N' }, { title: 'General Overview', payload: 'trigonometry-overview-N' }]);
+​
 			});
-        }
-    }
-    
+		}
+	}
+​
 ​
 	input_ary = payload.split('-');
 	topic = input_ary[0];
@@ -51,25 +51,27 @@ const state = (payload, say, sendButton) => {
 	topic = input_ary[0];
 	subtopic = input_ary[1];
 	vidtype = input_ary[2];
-	
-		
+​
+	var inputString = topic + " " + subtopic + " " + vidtype
+​
+​
 	if (payload === topic + '-' + subtopic + '-' + vidtype + '-N') {
-		axios ({
+		axios({
 			method: 'post', //post or get?
 			baseURL: 'http://34.96.245.124:2200', //our server url
 			url: '/NemoText',
 			'Content-Type': 'application/json',
 			data: {
-				specifics: input_ary
+				specifics: inputString
 			}
-	
+​
 		})
-		.then((result) => {
-			// do something with returned data?
-		})
-		.catch((err) => {})
-		sendButton("Try again?",[{title: 'Yes', payload: 'TryAgain'},'No']);
-	
+			.then((result) => { console.log(result.data) })
+			.catch((err) => { console.error(err) })
+​
+		say("Your video can be viewed on http://34.96.245.124:2200/search")
+		sendButton("Try again?", [{ title: 'Yes', payload: 'restart' }, 'No']);
+​
 	}
 ​
 };
@@ -84,8 +86,6 @@ module.exports = {
 	start: start,
 	state: state
 };
-
-
 
 
 // 'use strict';
