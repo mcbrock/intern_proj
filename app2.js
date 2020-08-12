@@ -23,7 +23,7 @@ app.use('/', express.static(__dirname));
 app.use(bodyParser.json());
 
 app.post("/NemoText",(req,res) => {
-    var user_data = req.body["specifics"];  //what we get from Nemobot user (the payload)
+    //var user_data = req.body["specifics"];  //what we get from Nemobot user (the payload)
     link = req.body["specifics"];
     console.log(link); // test the passed value
     user_data = ['precalculus', 'overview', 'long'];
